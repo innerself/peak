@@ -3,7 +3,7 @@ version: "3.8"
 
 services:
   peak:
-    image: spetrin/peak:1.1.1
+    image: spetrin/peak:${PEAK_VERSION}
     restart: always
     ports:
       - "8088:80"
