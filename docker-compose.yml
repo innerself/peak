@@ -1,0 +1,9 @@
+version: "3.8"
+
+
+services:
+  peak:
+    image: spetrin/peak:1.1.1
+    restart: always
+    ports:
+      - "8088:80"
