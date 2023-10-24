@@ -14,10 +14,10 @@ const currentDate = new Date();
 const currHour = currentDate.getHours();
 
 
-const stateOrders = {
-    Previous: 'Previous',
-    Current: 'Current',
-    Next: 'Next',
+const stateOrderClasses = {
+    Previous: '"previous-state-period"',
+    Current: '"current-state-period"',
+    Next: '"next-state-period"',
 }
 
 const stateTimes = {
@@ -26,57 +26,35 @@ const stateTimes = {
 }
 
 
-class StateOrderManager {
-    constructor(stateOrder) {
-        this.stateOrder = stateOrder
-    }
-
-    getPeriodClass() {
-        if (this.stateOrder === stateOrders.Previous) {
-            return '"previous-state-period"'
-        } else if (this.stateOrder === stateOrders.Current) {
-            return '"current-state-period"'
-        } else if (this.stateOrder === stateOrders.Next) {
-            return '"next-state-period"'
-        } else {
-            throw new Error(`Unknown state order ${this.stateOrder}`)
-        }
-    }
-}
-
-
 class States {
-    getPeak(stateOrder, stateTime) {
-        const orderManager = new StateOrderManager(stateOrder)
+    getPeak(stateOrderClass, stateTime) {
         let timeInterval = stateTime === stateTimes.Early ? '07.00 - 10.00' : '17.00 - 21.00'
 
         return {
             'stateName': 'Пик',
-            'statePeriod': `<div class=${orderManager.getPeriodClass()}>${timeInterval}</div>`,
+            'statePeriod': `<div class=${stateOrderClass}>${timeInterval}</div>`,
             'stateColor': '#f2c76e',
             'bodyColor': '#fae9c5',
             'borderColor': '#ecae2d',
         }
     }
 
-    getHalfPeak(stateOrder, stateTime) {
-        const orderManager = new StateOrderManager(stateOrder)
+    getHalfPeak(stateOrderClass, stateTime) {
         let timeInterval = stateTime === stateTimes.Early ? '10.00 - 17.00' : '21.00 - 23.00'
 
         return {
             'stateName': 'Полупик',
-            'statePeriod': `<div class=${orderManager.getPeriodClass()}>${timeInterval}</div>`,
+            'statePeriod': `<div class=${stateOrderClass}>${timeInterval}</div>`,
             'stateColor': '#ebe8e7',
             'bodyColor': '#f7f6f5',
             'borderColor': '#c1b7b4',
         }
     }
 
-    getNight(stateOrder) {
-        const orderManager = new StateOrderManager(stateOrder)
+    getNight(stateOrderClass) {
         return {
             'stateName': 'Ночь',
-            'statePeriod': `<div class=${orderManager.getPeriodClass()}>23.00 - 07.00</div>`,
+            'statePeriod': `<div class=${stateOrderClass}>23.00 - 07.00</div>`,
             'stateColor': '#bd9dea',
             'bodyColor': '#e5d8f7',
             'borderColor': '#925ddc',
@@ -91,25 +69,25 @@ let nextState;
 
 
 if (7 <= currHour && currHour < 10) {
-    previousState = states.getNight(stateOrders.Previous);
-    currentState = states.getPeak(stateOrders.Current, stateTimes.Early);
-    nextState = states.getHalfPeak(stateOrders.Next, stateTimes.Early);
+    previousState = states.getNight(stateOrderClasses.Previous);
+    currentState = states.getPeak(stateOrderClasses.Current, stateTimes.Early);
+    nextState = states.getHalfPeak(stateOrderClasses.Next, stateTimes.Early);
 } else if (10 <= currHour && currHour < 17) {
-    previousState = states.getPeak(stateOrders.Previous, stateTimes.Early);
-    currentState = states.getHalfPeak(stateOrders.Current, stateTimes.Early);
-    nextState = states.getPeak(stateOrders.Next, stateTimes.Late);
+    previousState = states.getPeak(stateOrderClasses.Previous, stateTimes.Early);
+    currentState = states.getHalfPeak(stateOrderClasses.Current, stateTimes.Early);
+    nextState = states.getPeak(stateOrderClasses.Next, stateTimes.Late);
 } else if (17 <= currHour && currHour < 21) {
-    previousState = states.getHalfPeak(stateOrders.Previous, stateTimes.Early);
-    currentState = states.getPeak(stateOrders.Current, stateTimes.Late);
-    nextState = states.getHalfPeak(stateOrders.Next, stateTimes.Late);
+    previousState = states.getHalfPeak(stateOrderClasses.Previous, stateTimes.Early);
+    currentState = states.getPeak(stateOrderClasses.Current, stateTimes.Late);
+    nextState = states.getHalfPeak(stateOrderClasses.Next, stateTimes.Late);
 } else if (21 <= currHour && currHour < 23) {
-    previousState = states.getPeak(stateOrders.Previous, stateTimes.Late);
-    currentState = states.getHalfPeak(stateOrders.Current, stateTimes.Late);
-    nextState = states.getNight(stateOrders.Next);
+    previousState = states.getPeak(stateOrderClasses.Previous, stateTimes.Late);
+    currentState = states.getHalfPeak(stateOrderClasses.Current, stateTimes.Late);
+    nextState = states.getNight(stateOrderClasses.Next);
 } else {
-    previousState = states.getHalfPeak(stateOrders.Previous, stateTimes.Late);
-    currentState = states.getNight(stateOrders.Current);
-    nextState = states.getPeak(stateOrders.Next, stateTimes.Early);
+    previousState = states.getHalfPeak(stateOrderClasses.Previous, stateTimes.Late);
+    currentState = states.getNight(stateOrderClasses.Current);
+    nextState = states.getPeak(stateOrderClasses.Next, stateTimes.Early);
 }
 
 
