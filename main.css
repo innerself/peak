@@ -1,7 +1,6 @@
 body {
     width: 90%;
     height: 100%;
-    /*border: black 1px solid;*/
     margin: auto;
 }
 
@@ -12,30 +11,23 @@ body {
     margin: 1rem auto;
     flex-flow: column;
 
-    background-color: #ebe8e7;
-    /*background-color: #f2c76e;*/
     color: #363636;
 
     border-radius: 99px;
-    /*border: green 1px solid;*/
     height: 20rem;
     width: 40rem;
 }
 
 #current-state {
-    /* Center the content */
     align-items: center;
     display: flex;
     justify-content: center;
     margin: 1rem auto;
     flex-flow: column;
 
-    background-color: #ebe8e7;
-    /*background-color: #ebe8e7;*/
     color: #363636;
 
     border-radius: 99px;
-    /*border: green 1px solid;*/
     height: 35rem;
     width: 75rem;
 }
@@ -47,14 +39,17 @@ body {
     margin: 1rem auto;
     flex-flow: column;
 
-    background-color: #ebe8e7;
-    /*background-color: #f2c76e;*/
     color: #363636;
 
     border-radius: 99px;
-    /*border: green 1px solid;*/
     height: 20rem;
     width: 40rem;
+}
+
+#previous-state, #current-state, #next-state {
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
 }
 
 #previous-state-name {
