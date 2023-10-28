@@ -1,35 +1,38 @@
 body {
-    width: 90%;
-    height: 100%;
-    margin: auto;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
 }
 
 #previous-state, #next-state {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: 1rem auto;
+    margin: 3% auto;
     flex-flow: column;
 
     color: #363636;
 
     border-radius: 99px;
     height: 20rem;
-    width: 40rem;
+    width: 30vw;
 }
 
 #current-state {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: 1rem auto;
+    margin: 3% auto;
     flex-flow: column;
 
     color: #363636;
 
     border-radius: 99px;
     height: 35rem;
-    width: 75rem;
+    width: 65vw;
 }
 
 #previous-state, #current-state, #next-state {
@@ -60,4 +63,43 @@ body {
 
 .current-state-period {
     font-size: 3rem;
+}
+
+@media screen and (max-width: 1200px) {
+    #previous-state, #next-state {
+        width: 65vw;
+    }
+
+    #current-state {
+        width: 95vw;
+    }
+
+    #current-state-name {
+        font-size: 10rem;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    #previous-state, #next-state {
+        width: 55vw;
+    }
+
+    #current-state {
+        width: 85vw;
+    }
+
+    #current-state-name {
+        font-size: 10rem;
+    }
+
+}
+
+@media screen and (max-width: 1600px) {
+    #previous-state, #next-state {
+        width: 45vw;
+    }
+
+    #current-state {
+        width: 75vw;
+    }
 }
